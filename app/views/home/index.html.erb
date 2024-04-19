@@ -12,55 +12,45 @@
       padding: 0;
       color: #fff;
       text-align: center;
-      background: url(<%= asset_path 'Home2.png' %>) no-repeat center center fixed;
+      background: url(<%= asset_path 'Galaxy.gif' %>) no-repeat center center fixed;
       background-size: cover;
       background-attachment: fixed;
     }
 
     .logo-header {
-        width: 200px; /* Dimensione del logo principale in alto */
+        width: 200px;
         height: auto;
         margin: auto;
         display: block;
-      }
-    
-      .center-text {
-        text-align: left; /* Allinea a sinistra il contenuto */
-        margin: 200px; /* Aggiunge margine per centrare il blocco */
-      }
-    
-      .logo-body {
-        width: 200px; /* Riduci la larghezza del logo qui */
+    }
+
+    .logo-container {
+        position: absolute; /* Posizione assoluta rispetto al body */
+        left: 200px; /* Distanza dal lato sinistro dello schermo */
+        top: 600px; /* Distanza dal lato superiore dello schermo */
+    }
+
+    .logo-body {
+        width: 200px;
         height: auto;
-        display: block;
-        margin-left: 20px; /* Aumenta se necessario per spostare il logo a destra */
-      }
-    
-      .title {
+        margin-bottom: 10px; /* Distanza tra il logo e la scritta "B&Berto" */
+    }
+
+    .title {
         font-size: 2em;
         margin: 0;
-        display: inline-block; /* Permette al testo di stare accanto al logo */
-        vertical-align: top; /* Allinea verticalmente il testo con la parte superiore del logo */
-        margin-left: 20px; /* Distanza tra il logo e il testo */
-      }
-    
-      .logo-container {
-        display: flex;
-        align-items: center; /* Allinea verticalmente il logo e il titolo */
-        justify-content: flex-start; /* Allinea orizzontalmente a sinistra */
-        padding-left: 40px; /* Aumenta se necessario per spostare il logo e il titolo a destra */
-      }
+        display: block; /* Modifica da inline-block a block */
+    }
   </style>
 </head>
 <body>
+  <div class="logo-container">
+    <%= link_to image_tag('Logo.png', alt: "Logo B&Berto", class: "logo-body"), "bberto.html" %>
+    <span class="title">B&Berto</span>
+  </div>
   <%= image_tag 'Metaberto.png', alt: "Logo MetaBerto", class: "logo-header" %>
   <h1>MetaBerto</h1>
   <h2>ver 0.1.0</h2>
   <h3>Dove vuoi andare oggi?</h3>
-
-  <div class="center-text">
-    <%= link_to image_tag('Logo.png', alt: "Logo B&Berto", class: "logo-body"), "bberto.html" %>
-    <h1 class="title">B&Berto</h1>
-  </div>
 </body>
 </html>
