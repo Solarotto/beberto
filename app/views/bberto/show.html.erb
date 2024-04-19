@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berto</title>
+  <%= csrf_meta_tags %>
+  <style>
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      color: #fff;
+  }
+  header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: #fff;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+  }
+  .logo {
+      width: 100px;
+      height: auto;
+  }
+  nav {
+      background-color: #333;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+  }
+  nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+  }
+  nav ul li {
+      margin: 0 20px;
+  }
+  nav ul li a {
+      color: #ddd;
+      text-decoration: none;
+  }
+  .calendar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+  }
+  .calendar-day {
+      margin: 5px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+  }
+  #activities {
+      display: none; /* Inizialmente nascosto */
+      margin: auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      background-color: #85858518;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  #additional-info {
+      display: flex;
+      justify-content: space-between; /* Allinea i riquadri agli estremi del contenitore */
+      flex-wrap: wrap; /* Permette ai riquadri di impilarsi su schermi piccoli */
+      margin: 20px auto;
+      width: 80%;
+      max-width: 1200px; /* Regola la larghezza massima del contenitore */
+  }
+
+  #rules, #to-bring {
+      flex-basis: 45%; /* Assegna una base per la larghezza di ciascun riquadro */
+      background-color: #f0f0f0;
+      color: #000;
+      margin: 10px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  #dish-ingredients {
+      background-color: #f0f0f0;
+      color: #000;
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: left;
+  }
+
+
+</style>
+</head>
+<body>
+
+  <header>
+    <%= link_to image_tag('Logo.png', alt: "Logo", class: "logo"), root_path %>
+    <h1>Welcome to B&Berto</h1>
+  </header>
+
+  <h2 style="text-align: center;">Seleziona un giorno:</h2>
+  <div class="calendar">
+    <!-- Il calendario verrà generato dinamicamente qui -->
+  </div>
+
+  <div id="activities">
+  <h3>Attività del giorno</h3>
+  <div class="activity-section" id="breakfastActivities"><strong>Colazione:</strong> <span>Nessuna attività per questo momento.</span></div>
+  <div class="activity-section" id="lunchActivities"><strong>Pranzo:</strong> <span>Nessuna attività per questo momento.</span></div>
+  <div class="activity-section" id="dinnerActivities"><strong>Cena:</strong> <span>Nessuna attività per questo momento.</span></div>
+  <div class="activity-section" id="dayActivities"><strong>Attività:</strong> <span>Nessuna attività per questo momento.</span></div>
+</div>
+
+<!-- Aggiunti i riquadri per regolamento e cose da portare -->
+<div id="additional-info" style="justify-content: space-between;">
+  <div id="rules">
+      <h3>Regolamento</h3>
+      <p>Piccole regole per la permanenza al B&Berto</p>
+      <ul>
+          <li>Dopo le ore 23 causa regolamento del palazzo vietato fare troppo casino con musica etc.</li>
+          <li>Evitare di entrare in camere chiuse eccezionfatta nel caso di via libera da parte del padrone di casa</li>
+          <li>Evitare di masturbarsi difronte agli altri ospiti cercando di emulare un'installazione artistica</li>
+          <li>Niente S.O.S.S. soprattutto con Sprea</li>
+      </ul>
+  </div>
+  <div id="to-bring">
+      <h3>Cose da Portare</h3>
+      <p>Onde evitare dimenticanze ed eventuali mancanze nel corso della vostra permanenza al B&Berto, ecco una lista di cose che lo staff vi consiglia di portare:</p>
+      <ul>
+          <li>Caricabatterie per dispositivi elettronici</li>
+          <li>Articoli per la cura personale</li>
+          <li>Cuscini</li>
+          <li>Coperta</li>
+          <li>Pigiama o abito da notte possibilmente con tema a orsacchiotto</li>
+
+      </ul>
+  </div>
+  <div id="dish-ingredients">
+      <h3>Lista dei Piatti</h3>
+      <select id="dishes">
+          <option value="">Seleziona un piatto...</option>
+          <option value="hamburger di carote">Hamburger di Carote</option>
+          <option value="pasta al ragu">Pasta al Ragù</option>
+          <option value="pasta al tonno">Pasta al Tonno</option>
+          <option value="minestrone">Minestrone</option>
+          <option value="hamburger e patatine">Hamburger e Patatine</option>
+          <option value="lingue di pizza">Lingue di Pizza</option>
+          <option value="pasta alla montecarlo">Pasta alla Montecarlo</option>
+          <option value="carbonara">Carbonara</option>
+          <option value="gyoza">Gyoza</option>
+          <option value="noodle">Noodle</option>
+          <option value="burrito">Burrito</option>
+      </select>
+      <div id="ingredients"></div>
+  </div>
+  
+</div>
+
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const calendar = document.querySelector('.calendar');
+      const activities = document.getElementById('activities');
+      const dishes = document.getElementById('dishes');
+      const ingredientsDiv = document.getElementById('ingredients');
+  
+      // Dati fittizi per le attività giornaliere
+      const activitiesData = {
+      '20': {
+          'Colazione': [' '],
+          'Pranzo': [' '],
+          'Cena': ['Maxi Pizza'],
+          'Attività': ['Serata Lupus in Babula']
+      },
+      '21': {
+          'Colazione': ['Trota'],
+          'Pranzo': ['Avanzi + Burger di carote'],
+          'Cena': ['Pasta al Ragù'],
+          'Attività': ['Serata Giochi Wii']
+      },
+      '22': {
+          'Colazione': ['Chiusura temporanea del B&Berto'],
+          'Pranzo': ['Chiusura temporanea del B&Berto'],
+          'Cena': ['Pasta alla Bellofigo'],
+          'Attività': ['Serata varietà']
+      },
+      '23': {
+          'Colazione': ['Latte & Cereali/Biscotti'],
+          'Pranzo': ['Minestrone'],
+          'Cena': ['Hamburger con patong'],
+          'Attività': ['Serata PoterePunto']
+      },
+      '24': {
+          'Colazione': ['Latte & Biscotti/Cereali'],
+          'Pranzo': ['Lingue di pizza'],
+          'Cena': ['Conchiglie alla montecarlo'],
+          'Attività': ['Serata Film/Serie tv/Anime trash']
+      },
+      '25': {
+          'Colazione': ['Biscotti/Cereali con latte'],
+          'Pranzo': ['Carbonara'],
+          'Cena': ['Gyoza'],
+          'Attività': ['Serata Risiko']
+      },
+      '26': {
+          'Colazione': ['Cereali/Biscotti con latte'],
+          'Pranzo': ['Noodle'],
+          'Cena': ['Burrito e sorpresa'],
+          'Attività': ['Serata alcolica']
+      },
+      '27': {
+          'Colazione': [],
+          'Pranzo': [],
+          'Cena': [],
+          'Attività': ['Tutti fuori dai coglioni']
+      }
+      };
+  
+      const dishIngredients = {
+          "hamburger di carote": "Carote, pangrattato, uova, spezie",
+          "pasta al ragu": "Pasta, carne macinata, pomodoro, cipolla, carota, sedano",
+          "pasta al tonno": "Pasta, tonno in scatola, pomodoro, aglio, peperoncino",
+          "minestrone": "Verdure miste, brodo vegetale, pasta o riso",
+          "hamburger e patatine": "Carne di manzo, pane per hamburger, patatine, salse",
+          "lingue di pizza": "Pasta per pizza, pomodoro, mozzarella, acciughe",
+          "pasta alla montecarlo": "Pasta, panna, funghi, prosciutto cotto",
+          "carbonara": "Pasta, guanciale, uova, pecorino romano, pepe nero",
+          "gyoza": "Pasta per gyoza, carne di maiale tritata, cavolo, aglio, salsa di soia",
+          "noodle": "Noodle, verdure miste, salsa di soia, spezie",
+          "burrito": "Tortilla di farina, carne di manzo o pollo, fagioli, riso, salsa"
+      };
+  
+      dishes.addEventListener('change', function() {
+          const selectedDish = this.value;
+          ingredientsDiv.innerHTML = selectedDish && dishIngredients[selectedDish] ? 
+                                     `<strong>Ingredienti:</strong> ${dishIngredients[selectedDish]}` : '';
+      });
+  
+      function renderCalendar() {
+          for (let i = 20; i <= 27; i++) {
+              const dayElement = document.createElement('div');
+              dayElement.classList.add('calendar-day');
+              dayElement.textContent = i;
+              dayElement.addEventListener('click', function() {
+                  showActivitiesForDay(i.toString());
+              });
+              calendar.appendChild(dayElement);
+          }
+      }
+  
+      function showActivitiesForDay(day) {
+          const dayActivities = activitiesData[day];
+          activities.style.display = 'block';
+  
+          document.getElementById('breakfastActivities').querySelector('span').textContent =
+              dayActivities && dayActivities.Colazione ? dayActivities.Colazione.join(', ') : 'Nessuna attività per questo momento.';
+          document.getElementById('lunchActivities').querySelector('span').textContent =
+              dayActivities && dayActivities.Pranzo ? dayActivities.Pranzo.join(', ') : 'Nessuna attività per questo momento.';
+          document.getElementById('dinnerActivities').querySelector('span').textContent =
+              dayActivities && dayActivities.Cena ? dayActivities.Cena.join(', ') : 'Nessuna attività per questo momento.';
+          document.getElementById('dayActivities').querySelector('span').textContent =
+              dayActivities && dayActivities.Attività ? dayActivities.Attività.join(', ') : 'Nessuna attività per questo momento.';
+      }
+  
+      renderCalendar();
+  });
+  </script>
+
+</body>
+</html>
